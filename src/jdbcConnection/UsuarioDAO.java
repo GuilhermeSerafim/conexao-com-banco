@@ -1,6 +1,7 @@
 package jdbcConnection;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 public class UsuarioDAO {
@@ -8,11 +9,24 @@ public class UsuarioDAO {
 	private Connection conexao;
 
 	public UsuarioDAO(Connection conexao) {
-		this.conexao = conexao;
+		this.conexao = new ConnectionFactory().conectar();
 	}
 	
 	//insert
 	public void insert(Usuario usuario) {
+		String sql = "insert into usuario (id, nome, senha, dataCadastro) values (?,?,?,?)";
+		
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setLong(1, usuario.getId());
+			stmt.setString(2, usuario.getNome());
+			stmt.setString(3, usuario.getSenha());
+			stmt.setDate(4, usuario.getDataCadastro());
+			stmt.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
