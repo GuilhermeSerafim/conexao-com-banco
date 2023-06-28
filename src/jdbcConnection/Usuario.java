@@ -13,6 +13,9 @@ public class Usuario {
 			this.dataCadastro = new Date(System.currentTimeMillis());
 		}
 		
+		public Usuario() {
+			
+		}
 		public long getId() {
 			return id;
 		}
