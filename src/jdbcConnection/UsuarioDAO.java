@@ -14,15 +14,17 @@ public class UsuarioDAO {
 	
 	//insert
 	public void insert(Usuario usuario) {
-		String sql = "insert into usuario (id, nome, senha, dataCadastro) values (?,?,?,?)";
+		String sql = "insert into usuario (nome, senha, data) values (?,?,?)";
 		
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setLong(1, usuario.getId());
-			stmt.setString(2, usuario.getNome());
-			stmt.setString(3, usuario.getSenha());
-			stmt.setDate(4, usuario.getDataCadastro());
+			//complemento da query
+			stmt.setString(1, usuario.getNome());
+			stmt.setString(2, usuario.getSenha());
+			stmt.setDate(3, usuario.getDataCadastro());
+			//executar a query
 			stmt.execute();
+			//fechar a operação
 			stmt.close();
 			
 		} catch (Exception e) {
