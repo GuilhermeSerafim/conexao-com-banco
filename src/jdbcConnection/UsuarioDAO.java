@@ -46,10 +46,10 @@ public class UsuarioDAO {
 			
 			while (rs.next()) { //enquanto tiver dados na tabela
 				Usuario usuario = new Usuario();
-				usuario.setId(rs.getLong("id"));
-				usuario.setNome(rs.getString("nome"));
-				usuario.setSenha(rs.getString("senha"));
-				usuario.setDataCadastro(rs.getDate("dataCadastro"));
+				usuario.setId(rs.getLong("ID"));
+				usuario.setNome(rs.getString("NOME"));
+				usuario.setSenha(rs.getString("SENHA"));
+				usuario.setDataCadastro(rs.getDate("DATACADASTRO"));
 				usuarios.add(usuario); //cada objeto usuário adicionado a lista de usuários
 			}
 			rs.close();
@@ -63,7 +63,23 @@ public class UsuarioDAO {
 	
 	//selectById
 	public Usuario selectById(long id) {
-		return null;
+		Usuario usuario = null;
+		String sql = "select * from usuario where id=?";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setLong(1, id);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				usuario = new Usuario();
+				usuario.setId(rs.getInt("ID"));
+				usuario.setNome(rs.getString("NOME"));
+				usuario.setSenha(rs.getString("SENHA"));
+				usuario.setDataCadastro(rs.getDate("DATACADASTRO"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return usuario;
 	}
 	
 	//update

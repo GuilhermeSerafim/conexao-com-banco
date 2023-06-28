@@ -10,8 +10,8 @@ public class Teste {
 		Usuario emerson = new Usuario("Emerson", "ABC123");
 		Usuario adriane = new Usuario("Adriane", "ABC123");
 		
-		dao.insert(emerson);
-		dao.insert(adriane);
+		//dao.insert(emerson);
+		//dao.insert(adriane);
 		List<Usuario> usuarios = dao.selectAll();
 		
 		for (Usuario usuario : usuarios) {
@@ -19,6 +19,11 @@ public class Teste {
 			System.out.println("Nome: " + usuario.getNome());
 			System.out.println("Data de Cadastro: " + usuario.getDataCadastro());
 		}
+		
+		Usuario usuario = dao.selectById(1);
+		System.out.println(usuario.getId());
+		System.out.println(usuario.getNome());
+		System.out.println(usuario.getDataCadastro());
 
 	}
 
