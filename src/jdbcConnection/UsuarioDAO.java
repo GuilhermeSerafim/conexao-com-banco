@@ -23,6 +23,7 @@ public class UsuarioDAO {
 			stmt.setString(3, usuario.getSenha());
 			stmt.setDate(4, usuario.getDataCadastro());
 			stmt.execute();
+			stmt.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
