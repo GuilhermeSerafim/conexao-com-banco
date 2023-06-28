@@ -2,6 +2,9 @@ package jdbcConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO {
@@ -35,7 +38,27 @@ public class UsuarioDAO {
 	
 	//selectAll
 	public List<Usuario> selectAll() {
-		return null;
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		String sql = "select * from usuario order by nome";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) { //enquanto tiver dados na tabela
+				Usuario usuario = new Usuario();
+				usuario.setId(rs.getLong("id"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setDataCadastro(rs.getDate("dataCadastro"));
+				usuarios.add(usuario); //cada objeto usuário adicionado a lista de usuários
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return usuarios;
 	}
 	
 	//selectById
