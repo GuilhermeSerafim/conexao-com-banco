@@ -1,4 +1,4 @@
-package jdbcConnection;
+package parteGrafica;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
